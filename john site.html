@@ -1,262 +1,872 @@
-# Create the HTML and CSS code for the "laudosgerais.com" website
-
-# HTML code for the website
-html_code = """
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CASAMI Consultoria de Engenharia Civil - Laudos Gerais</title>
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI para Engenheiros Civis | CASAMI</title>
+  <meta name="description" content="Plataforma de IA para engenheiros civis com automação de laudos, orçamento, inspeções, documentação técnica e inteligência para gestão de obras." />
+  <style>
+    :root {
+      --navy: #0b1f3a;
+      --navy-2: #102d52;
+      --blue: #0d6efd;
+      --blue-2: #1a73ff;
+      --teal: #17b7a6;
+      --gold: #f4c95d;
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #18314f;
+      --muted: #5e7087;
+      --line: #dfe7f1;
+      --shadow: 0 16px 40px rgba(13, 34, 63, 0.12);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f0f0f0;
-        color: #333;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #eef5ff 0%, #f8fafc 100%);
+      color: var(--text);
+      line-height: 1.6;
     }
-    header {
-        background-color: #0000FF;
-        color: white;
-        text-align: center;
-        padding: 1rem;
+
+    a { color: inherit; text-decoration: none; }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
     }
-    nav {
-        background-color: #0000CC;
-        padding: 0.5rem;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 31, 58, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    nav ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        justify-content: center;
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 18px;
     }
-    nav ul li {
-        margin: 0 1rem;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
-    nav ul li a {
-        color: white;
-        text-decoration: none;
-        transition: color 0.3s ease;
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--gold), #ffb703);
+      display: grid;
+      place-items: center;
+      color: var(--navy);
+      font-size: 1.1rem;
+      font-weight: 900;
     }
-    nav ul li a:hover {
-        color: #FFD700;
+
+    .nav {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      flex-wrap: wrap;
     }
-    main {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
+
+    .nav a {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.96rem;
+      transition: color 0.2s ease;
     }
-    .service-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
-        margin-top: 2rem;
+
+    .nav a:hover { color: white; }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold), #f7d774);
+      color: var(--navy);
+      border: none;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(244, 201, 93, 0.35);
     }
-    .service-item {
-        background-color: white;
-        padding: 1rem;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-    }
-    .service-item:hover {
-        transform: translateY(-5px);
-    }
-    footer {
-        background-color: #0000FF;
-        color: white;
-        text-align: center;
-        padding: 1rem;
-        margin-top: 2rem;
-    }
-    .logo {
-        max-width: 100px;
-        height: auto;
-        margin: 10px;
-    }
-    .cta-button {
-        display: inline-block;
-        background-color: #FFD700;
-        color: #0000CC;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        margin-top: 20px;
-        transition: background-color 0.3s ease;
-    }
-    .cta-button:hover {
-        background-color: #FFA500;
-    }
+
     .hero {
-        background-color: #0000CC;
-        color: white;
-        text-align: center;
-        padding: 4rem 2rem;
+      position: relative;
+      padding: 64px 0 32px;
+      background: radial-gradient(circle at top left, rgba(18, 115, 255, 0.18), transparent 28%),
+                  linear-gradient(135deg, #081d36 0%, #0f2f57 48%, #123a69 100%);
+      color: white;
+      overflow: hidden;
     }
-    .hero h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 36px;
+      align-items: center;
     }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #dfeaff;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.5rem, 4vw, 4.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+    }
+
     .hero p {
-        font-size: 1.2rem;
-        max-width: 800px;
-        margin: 0 auto 2rem;
+      margin: 0 0 26px;
+      max-width: 660px;
+      color: rgba(255,255,255,0.8);
+      font-size: 1.1rem;
     }
-    form {
-        display: flex;
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, var(--gold), #ffd76a);
+      color: var(--navy);
+      box-shadow: 0 16px 32px rgba(244,201,93,0.25);
+    }
+
+    .secondary-btn {
+      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.03);
+      color: white;
+    }
+
+    .primary-btn:hover,
+    .secondary-btn:hover,
+    .nav-cta:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.94rem;
+    }
+
+    .proof-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .dashboard {
+      background: rgba(255,255,255,0.89);
+      color: var(--text);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 22px 60px rgba(7, 23, 46, 0.28);
+    }
+
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #dfe7f1;
+    }
+
+    .dot:nth-child(1) { background: #ff6b6b; }
+    .dot:nth-child(2) { background: #ffd166; }
+    .dot:nth-child(3) { background: #7bd389; }
+
+    .mini-kpi {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .kpi {
+      background: linear-gradient(180deg, #f8fbff, #edf5ff);
+      border: 1px solid #dfeaf8;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .kpi-label {
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .kpi-value {
+      font-size: clamp(1.5rem, 2vw, 2.2rem);
+      font-weight: 800;
+      margin-top: 7px;
+      letter-spacing: -0.04em;
+    }
+
+    .chart {
+      border-radius: 18px;
+      background: linear-gradient(180deg, #eef7ff, #f7fbff);
+      border: 1px solid #dfeaf8;
+      padding: 16px 14px 10px;
+    }
+
+    .bars {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      height: 120px;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .bar {
+      flex: 1;
+      border-radius: 12px 12px 0 0;
+      background: linear-gradient(180deg, var(--blue), var(--teal));
+      opacity: 0.9;
+      min-height: 20%;
+    }
+
+    .bar:nth-child(1) { height: 38%; }
+    .bar:nth-child(2) { height: 58%; }
+    .bar:nth-child(3) { height: 72%; }
+    .bar:nth-child(4) { height: 86%; }
+    .bar:nth-child(5) { height: 100%; }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 3vw, 3rem);
+      letter-spacing: -0.04em;
+      color: var(--navy);
+    }
+
+    .section-head p {
+      margin: 0 auto;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px 22px;
+      box-shadow: 0 10px 30px rgba(16, 37, 63, 0.04);
+    }
+
+    .icon-box {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, rgba(13,110,253,0.12), rgba(23,183,166,0.18));
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      color: var(--navy);
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .solutions {
+      background: linear-gradient(180deg, #f3f8ff 0%, #ffffff 100%);
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .process-list {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: 0 16px 42px rgba(16, 37, 63, 0.06);
+    }
+
+    .process-item {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .process-item:last-child { border-bottom: none; }
+
+    .step {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .process-item h3 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 1.2rem;
+    }
+
+    .process-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .insight-box {
+      display: grid;
+      gap: 18px;
+    }
+
+    .info-panel {
+      background: linear-gradient(135deg, #0f2d52, #0b1f3a);
+      color: white;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-panel h3 {
+      margin: 0 0 18px;
+      font-size: 1.5rem;
+    }
+
+    .info-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #ffd76a);
+      display: grid;
+      place-items: center;
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .stat-box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: 0 10px 28px rgba(16, 37, 63, 0.05);
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: clamp(1.8rem, 2vw, 2.5rem);
+      color: var(--navy);
+      letter-spacing: -0.05em;
+    }
+
+    .stat-box span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cta-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+      background: linear-gradient(135deg, #ebf6ff 0%, rgba(11,31,58,0.04) 100%);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: clamp(24px, 4vw, 46px);
+      box-shadow: 0 18px 44px rgba(16,37,63,0.06);
+    }
+
+    .cta-copy h3 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+      color: var(--navy);
+    }
+
+    .cta-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 16px 30px rgba(15, 34, 59, 0.06);
+    }
+
+    .contact-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+    }
+
+    .contact-list li strong {
+      color: var(--navy);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .contact-list a {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .site-footer {
+      background: #081c34;
+      color: rgba(255,255,255,0.78);
+      padding: 28px 0 60px;
+    }
+
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      font-weight: 700;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .stack-grid,
+      .cta-wrap,
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .header-row {
         flex-direction: column;
-        max-width: 500px;
-        margin: 0 auto;
+        align-items: flex-start;
+        padding: 14px 0;
+      }
+
+      .nav {
+        gap: 12px 16px;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .primary-btn,
+      .secondary-btn,
+      .nav-cta {
+        width: 100%;
+      }
+
+      .mini-kpi {
+        grid-template-columns: 1fr;
+      }
     }
-    form input, form textarea {
-        margin-bottom: 1rem;
-        padding: 0.5rem;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-    }
-    form button {
-        align-self: flex-start;
-    }
-</style>
+  </style>
 </head>
 <body>
-    <header>
-        <h1>CASAMI Consultoria de Engenharia Civil</h1>
-        <p>Diagnóstico, Avaliação e Perícia LTA.</p>
-        <p>Laudos Gerais - Seu parceiro em engenharia</p>
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#sobre">Sobre Nós</a></li>
-            <li><a href="#servicos">Serviços</a></li>
-            <li><a href="#contato">Contato</a></li>
-        </ul>
-    </nav>
-    
-    <main>
-        <section id="home" class="hero">
-            <h2>Bem-vindo à Laudos Gerais</h2>
-            <p>Excelência em engenharia civil com soluções personalizadas para suas necessidades técnicas e legais.</p>
-            <a href="#contato" class="cta-button">Solicite um Orçamento</a>
-        </section>
-        
-        <section id="sobre">
-            <h2>Sobre Nós</h2>
-            <h3>Visão</h3>
-            <p>Ser a referência nacional em laudos técnicos e consultoria de engenharia, reconhecida pela qualidade, inovação e confiabilidade de nossos serviços.</p>
-            <h3>Missão</h3>
-            <p>Fornecer laudos técnicos e serviços de consultoria em engenharia civil com excelência, contribuindo para a segurança, valorização e conformidade legal dos empreendimentos de nossos clientes.</p>
-            <h3>Valores</h3>
-            <ul>
-                <li>Precisão técnica</li>
-                <li>Integridade profissional</li>
-                <li>Inovação constante</li>
-                <li>Compromisso com o cliente</li>
-                <li>Responsabilidade social e ambiental</li>
-            </ul>
-        </section>
-        
-        <section id="servicos">
-            <h2>Nossos Serviços</h2>
-            <div class="service-grid">
-                <div class="service-item">
-                    <h3>Laudo Técnico de Avaliação de Imóveis & Terrenos</h3>
-                    <p>Análises detalhadas e imparciais para determinar o valor justo de mercado de propriedades, essenciais para transações imobiliárias e processos judiciais.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Laudo de Entrega & Recebimento de Obras</h3>
-                    <p>Documentação criteriosa que garante a conformidade da obra com o projeto e especificações contratuais, protegendo tanto construtoras quanto proprietários.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Laudo Técnico de Vistoria de Vizinhança</h3>
-                    <p>Avaliações preventivas que documentam as condições das propriedades adjacentes antes do início de obras, minimizando riscos de litígios futuros.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Laudo Técnico de Inspeção Predial</h3>
-                    <p>Diagnóstico completo das condições de edificações, identificando necessidades de manutenção e garantindo a segurança dos ocupantes.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Laudo Técnico de Estabilidade</h3>
-                    <p>Avaliações cruciais da integridade estrutural de edificações, fundamentais para a segurança e longevidade das construções.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Perícias de Construção Civil</h3>
-                    <p>Investigações técnicas aprofundadas para elucidar questões complexas em disputas legais ou problemas construtivos.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Laudo Técnico de Reforma</h3>
-                    <p>Planejamento detalhado e avaliação de viabilidade para projetos de reforma, assegurando intervenções seguras e eficientes.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Regularização de Imóveis</h3>
-                    <p>Orientação especializada para adequar imóveis às normas legais, facilitando processos de compra, venda ou financiamento.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Orçamento Paramétrico</h3>
-                    <p>Estimativas precisas de custos baseadas em dados históricos e parâmetros da indústria, essenciais para o planejamento financeiro de projetos.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Construção Financiada</h3>
-                    <p>Assessoria técnica completa para viabilizar financiamentos imobiliários, incluindo toda a documentação necessária.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Emissão de ART</h3>
-                    <p>Elaboração e registro de Anotações de Responsabilidade Técnica, garantindo a legalidade e o respaldo profissional de todos os serviços prestados.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Reformas</h3>
-                    <p>Gerenciamento completo de projetos de reforma, desde o planejamento inicial até a execução final, assegurando qualidade e conformidade.</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="contato">
-            <h2>Entre em Contato</h2>
-            <p>Resp. Técnico: Eng. Civil John C. Clotaire</p>
-            <p>Nº de Registro CREA-SP: 5071070085</p>
-            <p>Telefone: <a href="tel:+5511986922758">(11) 98692-2758</a> / <a href="tel:+5511985578613">(11) 98557-8613</a></p>
-            <p>E-mail: <a href="mailto:casami2021@outlook.com">casami2021@outlook.com</a></p>
-            <p>Instagram: <a href="https://www.instagram.com/casami_consultoria" target="_blank">@casami_consultoria</a></p>
-            <p>Website: <a href="https://laudosgerais.com">www.laudosgerais.com</a></p>
-            <form action="https://formspree.io/f/your-form-id" method="POST">
-                <input type="text" name="name" placeholder="Seu Nome" required>
-                <input type="email" name="email" placeholder="Seu E-mail" required>
-                <textarea name="message" placeholder="Sua Mensagem" required></textarea>
-                <button type="submit" class="cta-button">Enviar Mensagem</button>
-            </form>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 Laudos Gerais - CASAMI Consultoria de Engenharia Civil. Todos os direitos reservados.</p>
-        <div>
-            <img src="/a/dfa9c864-3612-4159-b03f-87c93f6a689f" alt="Logo CREA-SP e CASAMI Consultoria" class="logo">
-        </div>
-    </footer>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand" aria-label="CASAMI AI para Engenheiros Civis">
+        <div class="brand-mark">AI</div>
+        <div>CASAMI • Engenheiros Civis</div>
+      </div>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#solucoes">Soluções</a>
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#processo">Processo</a>
+        <a href="#contato">Contato</a>
+        <a href="#contato" class="nav-cta">Agendar chamada</a>
+      </nav>
+    </div>
+  </header>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({behavior: 'smooth'});
-                    }
-                });
-            });
-        });
-    </script>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">IA aplicada à engenharia civil</div>
+          <h1>AI para engenheiros civis que querem construir mais com precisão.</h1>
+          <p>
+            Automatize laudos, vistorias, orçamentos e análise técnica com uma plataforma pensada para profissionais
+            de obra, consultoria e engenharia de estruturas, imóveis e regularização.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#contato">Solicitar diagnóstico</a>
+            <a class="secondary-btn" href="#solucoes">Ver soluções</a>
+          </div>
+          <div class="hero-proof">
+            <span class="proof-badge">✓ 24h para análise inicial</span>
+            <span class="proof-badge">✓ Redução de retrabalho</span>
+            <span class="proof-badge">✓ Suporte técnico especializado</span>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Dashboard da IA">
+          <div class="dashboard">
+            <div class="dashboard-header">
+              <span>Vision IA / Obra</span>
+              <div class="window-dots" aria-hidden="true">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+            </div>
+
+            <div class="mini-kpi">
+              <div class="kpi">
+                <div class="kpi-label">Laudos</div>
+                <div class="kpi-value">1.240</div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">Tempo</div>
+                <div class="kpi-value">-42%</div>
+              </div>
+            </div>
+
+            <div class="chart" aria-label="Gráfico de produtividade">
+              <div style="display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:0.8rem;">
+                <span>Produtividade</span>
+                <strong style="color:var(--navy);">+87%</strong>
+              </div>
+              <div class="bars" aria-hidden="true">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="funcionalidades">
+      <div class="container">
+        <div class="section-head">
+          <h2>O que a IA faz por sua rotina técnica</h2>
+          <p>Ferramentas para acelerar diagnósticos, reduzir erros e deixar a gestão de projetos mais inteligente e segura.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="icon-box">🏗️</div>
+            <h3>Laudos automatizados</h3>
+            <p>Geração estruturada de relatórios com identificação de riscos, defeitos, anomalias e recomendações técnicas.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-box">📊</div>
+            <h3>Orçamento e previsão</h3>
+            <p>Estimativas paramétricas mais rápidas com base em dados históricos, materiais, mão de obra e cronograma.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-box">🔎</div>
+            <h3>Inspeção inteligente</h3>
+            <p>Coleta, organização e análise de vistorias, fotos, observações e pendências em um fluxo único e seguro.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-box">🧠</div>
+            <h3>Diagnóstico de risco</h3>
+            <p>Reconhecimento de padrões de falhas, patologias e riscos estruturais com suporte para tomada de decisão.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-box">📁</div>
+            <h3>Documentação técnica</h3>
+            <p>Centralização de plantas, pareceres, ART, memoriais, relatórios e evidências em um ambiente profissional.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-box">⚡</div>
+            <h3>Gestão de obras</h3>
+            <p>Monitoramento de produtividade, cronograma, pendências, risco e indicadores operacionais em tempo real.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="solucoes" class="solutions">
+      <div class="container">
+        <div class="section-head">
+          <h2>Uma plataforma para o ciclo completo da obra</h2>
+          <p>Da análise inicial à aprovação final, a IA ajuda a reduzir retrabalho e entregar mais segurança técnica para cada etapa.</p>
+        </div>
+
+        <div class="stack-grid">
+          <div class="process-list" id="processo">
+            <div class="process-item">
+              <div class="step">1</div>
+              <div>
+                <h3>Diagnóstico inicial</h3>
+                <p>Classificação do caso, escopo e dados do empreendimento para priorizar a análise técnica correta.</p>
+              </div>
+            </div>
+
+            <div class="process-item">
+              <div class="step">2</div>
+              <div>
+                <h3>Coleta de evidências</h3>
+                <p>Organização de fotos, documentos, projetos, relatórios e observações em um ambiente centralizado.</p>
+              </div>
+            </div>
+
+            <div class="process-item">
+              <div class="step">3</div>
+              <div>
+                <h3>Análise assistida por IA</h3>
+                <p>Processamento de informações para identificar falhas, riscos, incompatibilidades e oportunidades.</p>
+              </div>
+            </div>
+
+            <div class="process-item">
+              <div class="step">4</div>
+              <div>
+                <h3>Relatório técnico e decisões</h3>
+                <p>Entrega de parecer com conclusões, recomendações, priorização e plano de ação para o cliente.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="insight-box">
+            <div class="info-panel">
+              <h3>Resultados esperados</h3>
+              <ul class="info-list">
+                <li><span class="check">✓</span> Menor tempo de produção de laudos</li>
+                <li><span class="check">✓</span> Maior consistência técnica</li>
+                <li><span class="check">✓</span> Melhor rastreabilidade documental</li>
+                <li><span class="check">✓</span> Suporte para inspeções e perícias</li>
+              </ul>
+            </div>
+
+            <div class="stats-row">
+              <div class="stat-box">
+                <strong>3x</strong>
+                <span>mais produtividade</span>
+              </div>
+              <div class="stat-box">
+                <strong>90%</strong>
+                <span>automação em rotina</span>
+              </div>
+              <div class="stat-box">
+                <strong>24/7</strong>
+                <span>assistência analítica</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="cta-wrap">
+          <div class="cta-copy">
+            <h3>Transforme sua consultoria em uma operação mais inteligente.</h3>
+            <p>
+              A IA pode acelerar a rotina de engenharia civil sem perder rigor técnico, segurança e clareza na comunicação com clientes e equipes.
+            </p>
+          </div>
+
+          <div class="contact-card">
+            <ul class="contact-list">
+              <li>
+                <div>
+                  <strong>Responsável técnico</strong>
+                  Eng. Civil John C. Clotaire
+                </div>
+              </li>
+              <li>
+                <div>
+                  <strong>Registro CREA-SP</strong>
+                  5071070085
+                </div>
+              </li>
+              <li>
+                <div>
+                  <strong>WhatsApp / Telefone</strong>
+                  <a href="tel:+5511986922758">(11) 98692-2758</a> / <a href="tel:+5511985578613">(11) 98557-8613</a>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <strong>E-mail</strong>
+                  <a href="mailto:casami2021@outlook.com">casami2021@outlook.com</a>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <strong>Instagram</strong>
+                  <a href="https://www.instagram.com/casami_consultoria" target="_blank" rel="noreferrer">@casami_consultoria</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div class="footer-brand">
+        <div class="brand-mark" style="width:36px;height:36px;font-size:1rem;">AI</div>
+        <span>CASAMI • AI para Engenheiros Civis</span>
+      </div>
+      <div>© 2024 Laudos Gerais - Consultoria de Engenharia Civil</div>
+    </div>
+  </footer>
 </body>
 </html>
