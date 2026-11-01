@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CASAMI Consultoria de Engenharia Civil | Laudos, Vistorias e Perícias</title>
-  <meta name="description" content="CASAMI Consultoria de Engenharia Civil oferece laudos técnicos, vistorias, avaliações, perícias e regularização para imóveis, condomínios, obras e empreendimentos." />
+  <title>CASAMI | Laudos Técnicos, Vistorias e Perícias em Engenharia Civil</title>
+  <meta name="description" content="CASAMI Consultoria de Engenharia Civil: laudos técnicos, vistorias prediais, avaliações de imóveis, perícias e assessoria para regularização e obras." />
   <style>
     :root {
       --navy: #0d1f36;
       --navy-2: #112d4f;
       --blue: #0a6ed6;
-      --blue-2: #1c7ef2;
       --teal: #19b1a4;
       --gold: #f4c95d;
       --bg: #f5f7fb;
@@ -18,7 +17,7 @@
       --text: #17324d;
       --muted: #60738b;
       --line: #dfe9f4;
-      --shadow: 0 18px 50px rgba(8, 24, 43, 0.12);
+      --shadow: 0 22px 42px rgba(13, 31, 54, 0.12);
       --radius: 22px;
     }
 
@@ -26,9 +25,9 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: linear-gradient(180deg, #f5f8ff 0%, #f8fafc 100%);
-      color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f4f8ff 0%, #f9fbff 100%);
+      color: var(--text);
       line-height: 1.6;
     }
     a { color: inherit; text-decoration: none; }
@@ -39,7 +38,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(13, 31, 54, 0.9);
+      background: rgba(13, 31, 54, 0.92);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
@@ -54,30 +53,28 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      color: #fff;
+      color: white;
       font-weight: 700;
-      letter-spacing: 0.02em;
     }
     .brand-mark {
       width: 40px;
       height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--gold), #ffdf7a);
+      color: var(--navy);
       display: grid;
       place-items: center;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--gold), #ffdb77);
-      color: var(--navy);
       font-weight: 900;
-      font-size: 1rem;
     }
     .nav {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
+      flex-wrap: wrap;
       gap: 22px;
     }
     .nav a {
       color: rgba(255,255,255,0.82);
-      font-size: 0.95rem;
+      font-size: 0.96rem;
       transition: color 0.2s ease;
     }
     .nav a:hover { color: white; }
@@ -114,8 +111,8 @@
       background: rgba(255,255,255,0.05);
       color: #dfeeff;
       font-size: 0.74rem;
-      letter-spacing: 0.08em;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
       margin-bottom: 18px;
     }
     .hero h1 {
@@ -126,17 +123,17 @@
     }
     .hero p {
       margin: 0 0 24px;
-      max-width: 660px;
-      color: rgba(255,255,255,0.82);
       font-size: 1.08rem;
+      color: rgba(255,255,255,0.82);
+      max-width: 640px;
     }
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
-    .primary-btn, .secondary-btn {
+    .primary-btn, .secondary-btn, .small-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -144,9 +141,8 @@
       padding: 0 22px;
       border-radius: 14px;
       font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.2s ease;
       border: 1px solid transparent;
+      transition: transform 0.2s ease;
     }
     .primary-btn {
       background: linear-gradient(135deg, var(--gold), #fedc71);
@@ -158,7 +154,14 @@
       border-color: rgba(255,255,255,0.2);
       color: white;
     }
-    .primary-btn:hover, .secondary-btn:hover, .nav-cta:hover { transform: translateY(-1px); }
+    .small-btn {
+      background: var(--navy);
+      color: white;
+      min-height: 42px;
+      padding: 0 16px;
+      font-size: 0.92rem;
+    }
+    .primary-btn:hover, .secondary-btn:hover, .small-btn:hover, .nav-cta:hover { transform: translateY(-1px); }
 
     .hero-proof {
       display: flex;
@@ -168,10 +171,10 @@
       font-size: 0.9rem;
     }
     .proof-badge {
-      padding: 8px 12px;
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 10px;
       background: rgba(255,255,255,0.04);
+      padding: 8px 12px;
     }
 
     .hero-card {
@@ -223,7 +226,7 @@
       font-size: 0.7rem;
     }
     .kpi-value {
-      font-size: clamp(1.5rem, 2vw, 2.2rem);
+      font-size: clamp(1.4rem, 2vw, 2rem);
       margin-top: 6px;
       font-weight: 800;
       letter-spacing: -0.04em;
@@ -255,7 +258,7 @@
     .bar:nth-child(4){height:84%}
     .bar:nth-child(5){height:100%}
 
-    section { padding: 92px 0; }
+    section { padding: 94px 0; }
     .section-head {
       text-align: center;
       margin-bottom: 44px;
@@ -267,7 +270,7 @@
       color: var(--navy);
     }
     .section-head p {
-      max-width: 780px;
+      max-width: 760px;
       margin: 0 auto;
       color: var(--muted);
       font-size: 1.05rem;
@@ -439,7 +442,9 @@
       color: rgba(255,255,255,0.78);
       padding: 28px 0 56px;
     }
-    .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-row {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
     .footer-brand {
       display: flex;
       align-items: center;
@@ -493,7 +498,7 @@
             A CASAMI oferece diagnóstico técnico, avaliação de imóveis, inspeções prediais, pareceres e regularização para condomínios, proprietários, construtoras e empresas que precisam de confiabilidade e precisão.
           </p>
           <div class="hero-actions">
-            <a href="#contato" class="primary-btn">Solicitar orçamento</a>
+            <a href="mailto:casami2021@outlook.com?subject=Solicita%C3%A7%C3%A3o%20de%20or%C3%A7amento" class="primary-btn">Solicitar orçamento</a>
             <a href="#consultoria" class="secondary-btn">Nossos serviços</a>
           </div>
           <div class="hero-proof">
@@ -566,7 +571,7 @@
           <article class="feature-card">
             <div class="icon-box">🏗️</div>
             <h3>Laudo de entrega e recebimento de obra</h3>
-            <p>Avaliação de conformidade, qualidade e entregue do empreendimento em relação ao projeto e às especificações.</p>
+            <p>Avaliação de conformidade, qualidade e entrega do empreendimento em relação ao projeto e às especificações.</p>
           </article>
 
           <article class="feature-card">
@@ -670,6 +675,10 @@
             <p>
               Conte com a CASAMI para avaliações, inspeções, perícias e apoio técnico com profissionalismo, clareza e atenção às necessidades do cliente.
             </p>
+            <div class="hero-actions" style="margin-top:24px;">
+              <a href="mailto:casami2021@outlook.com?subject=Solicita%C3%A7%C3%A3o%20de%20or%C3%A7amento" class="primary-btn">Enviar e-mail</a>
+              <a href="https://wa.me/5511986922758?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20de%20laudo%20ou%20vistoria." class="secondary-btn" target="_blank" rel="noreferrer">WhatsApp</a>
+            </div>
           </div>
 
           <div class="contact-card">
